@@ -1,26 +1,28 @@
-import { Controller, Get ,Param, Post, Body} from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { CatDTO } from './DTO/catsDTO';
 import { Cat } from './Model/Cat';
-import { runInThisContext } from 'vm';
+import { CatsService } from './cats.service';
+
 
 @Controller('cats')
 export class CatsController {
-Cats
+    constructor(private catService: CatsService){}
+
+    Cats
     @Get()
-    findAllCats(){
-        return "Get All Cats functions"
+    findAllCats() {
+        this.catService.getHello();
     }
     @Get(":id")
-    getHelloById(@Param("id") id )
-    {
-      return `Got cannot and param variable`
+    getHelloById(@Param("id") id) {
+        this.catService.getHelloByID(id);
     }
 
     @Post()
-    postCats(@Body() catDTO: CatDTO ){
-        let cat = new Cat(new Date(),catDTO.name,catDTO.gender);
+    postCats(@Body() catDTO: CatDTO) {
+        let cat = new Cat(new Date(), catDTO.name, catDTO.gender);
         this.Cats.push(cat);
-        return this.Cats;   
+        return this.Cats;
     }
 
 }
