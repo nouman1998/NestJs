@@ -16,7 +16,7 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(LoggerMiddleware)
-      .exclude({path:'cats1',method:RequestMethod.GET})
+      // .exclude({path:'cats1',method:RequestMethod.GET})
       .forRoutes(CatsController)
       
   }
