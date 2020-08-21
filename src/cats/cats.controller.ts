@@ -33,7 +33,11 @@ export class CatsController {
         this.Cats.push(cat);
         return this.Cats;
     }
-  
+    @Post('/*')
+    PostException(){
+        console.log("Nouman")
+        throw new HttpException("Not an method",HttpStatus.INTERNAL_SERVER_ERROR);
+    }
    
 
 }
