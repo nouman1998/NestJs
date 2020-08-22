@@ -1,3 +1,4 @@
+import { AppMiddleware } from './AppMiddleware';
 import { CatsService } from './cats/cats.service';
 import { Module, MiddlewareConsumer, Get, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -14,10 +15,11 @@ import { CatsController } from './cats/cats.controller';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
+    [consumer
       .apply(LoggerMiddleware)
       // .exclude({path:'cats1',method:RequestMethod.GET})
-      .forRoutes(CatsController)
+      .forRoutes(CatsController),consumer.apply(AppMiddleware).forRoutes(AppController)]
       
   }
+ 
 }
